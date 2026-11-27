@@ -3,111 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>王小明的個人學習空間</title>
-    🦢 澳門黑臉琵鷺：冬日訪客</h1><p>參觀路氹城生態保護區前必讀</p>
+    <title>澳門路氹城生態保護區｜黑臉琵鷺導覽</title>
+    <!-- 引入 Tailwind CSS 以實現現代化與響應式設計 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts 思源黑體 (Noto Sans TC) -->
+    <link rel="preconnect" href="https://geminiai.blog/gemini/fonts-googleapis">
+    <link rel="preconnect" href="https://geminiai.blog/gemini/fonts-gstatic" crossorigin>
+    <link href="https://geminiai.blog/gemini/fonts-googleapis/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* 整體頁面樣式設定 */
         body {
-            font-family: "Microsoft JhengHei", sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
+            font-family: 'Noto Sans TC', sans-serif;
         }
-        /* 頁首區塊 */
-        header {
-            background-color: #2c3e50;
-            color: #ffffff;
-            text-align: center;
-            padding: 3rem 1rem;
+        /* 隱藏水平捲軸但保留手機端滑動分頁列的能力 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.2rem;
-        }
-        header p {
-            margin-top: 0.5rem;
-            color: #bdc3c7;
-        }
-        /* 主要內容容器 */
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        /* 卡片區塊設計 */
-        .card {
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        h2 {
-            color: #2980b9;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 0.5rem;
-        }
-        /* 標籤樣式 */
-        .tag {
-            display: inline-block;
-            background: #e1f0fa;
-            color: #2980b9;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        /* 頁尾 */
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            color: #7f8c8d;
-            font-size: 0.9rem;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body>
+<body class="bg-stone-50 text-stone-800 antialiased min-h-screen flex flex-col">
 
-    <header>
-        <h1>嗨，我是王小明 👋</h1>
-        <p>高一學生 ｜ 喜歡寫程式、攝影與探索新事物</p>
+    <!-- 頂部主視覺與導覽列 -->
+    <header class="bg-emerald-800 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 pt-4 pb-2">
+            <div class="flex items-center justify-between mb-3">
+                <div>
+                    <span class="text-xs font-medium tracking-wider uppercase bg-emerald-700 text-emerald-100 px-2.5 py-1 rounded-full">路氹城生態保護區 訪客前導指南</span>
+                    <h1 class="text-xl sm:text-2xl font-bold mt-1.5 tracking-tight">澳門珍稀候鳥：黑臉琵鷺</h1>
+                </div>
+                <div class="hidden sm:block text-right text-emerald-200 text-xs">
+                    <p>Black-faced Spoonbill</p>
+                    <p class="italic">Platalea minor</p>
+                </div>
+            </div>
+
+            <!-- 可點選的分頁按鈕列 (手機支援橫向滑動) -->
+            <nav aria-label="內容分頁" class="flex space-x-2 overflow-x-auto no-scrollbar pb-1">
+                <button onclick="switchTab('appearance')" id="tab-appearance" class="tab-btn active-tab whitespace-nowrap px-4 py-2.5 rounded-t-lg font-medium text-sm transition-colors duration-200 bg-stone-50 text-emerald-900 shadow-sm">
+                    🔍 外形特徵
+                </button>
+                <button onclick="switchTab('habits')" id="tab-habits" class="tab-btn whitespace-nowrap px-4 py-2.5 rounded-t-lg font-medium text-sm transition-colors duration-200 text-emerald-100 hover:bg-emerald-700/70">
+                    🌊 生態習性
+                </button>
+                <button onclick="switchTab('conservation')" id="tab-conservation" class="tab-btn whitespace-nowrap px-4 py-2.5 rounded-t-lg font-medium text-sm transition-colors duration-200 text-emerald-100 hover:bg-emerald-700/70">
+                    🛡️ 保育現況
+                </button>
+                <button onclick="switchTab('rules')" id="tab-rules" class="tab-btn whitespace-nowrap px-4 py-2.5 rounded-t-lg font-medium text-sm transition-colors duration-200 text-emerald-100 hover:bg-emerald-700/70">
+                    🔭 觀鳥守則
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <div class="container">
-        <section class="card">
-            <h2>關於我</h2>
-            <p>目前就讀於某某高中一年級。這學期我利用自主學習時間開始接觸網頁設計，希望透過這個網站記錄我的高中生活、社團活動以及未來的學習成果。</p>
+    <!-- 主要內容區塊 -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-8">
+
+        <!-- 分頁 1：外形特徵 -->
+        <section id="content-appearance" class="tab-content block space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="md:flex">
+                    <!-- 引用同一資料夾內的 bird1.png，並提供載入失敗時的佔位圖 -->
+                    <div class="md:w-1/2 bg-stone-200 relative">
+                        <img src="bird1.png" 
+                             alt="黑臉琵鷺外形特徵" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x450/e7e5e4/1c1917?text=bird1.png+(黑臉琵鷺外形)';"
+                             class="w-full h-64 md:h-full object-cover">
+                        <span class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-md backdrop-blur-sm">圖：黑臉琵鷺成鳥</span>
+                    </div>
+                    <div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
+                        <div class="inline-flex items-center space-x-2 text-emerald-700 font-semibold text-sm">
+                            <span>特徵辨識指南</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-stone-900">天生的「黑面舞者」</h2>
+                        <p class="text-stone-600 leading-relaxed text-sm sm:text-base">
+                            黑臉琵鷺屬於大型涉禽，體長約 74 至 81 厘米。全身羽毛以純白色為主，最顯著的特徵是擁有如中國傳統樂器「琵琶」般扁平且前端寬闊的黑色長喙，以及相連的黑色裸露臉部皮膚。
+                        </p>
+                        <ul class="space-y-2.5 text-sm text-stone-700 pt-2 border-t border-stone-100">
+                            <li class="flex items-start">
+                                <span class="text-emerald-600 mr-2 font-bold">•</span>
+                                <span><strong>繁殖羽變化：</strong>每年春季繁殖期，成鳥頭後會長出蓬鬆的金黃色冠羽，胸前亦會染上一抹亮麗的橙黃色。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-600 mr-2 font-bold">•</span>
+                                <span><strong>修長雙腿：</strong>擁有黑色的長腿與腳趾，適合在淺水濕地與泥灘中穩健涉水行走。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-emerald-600 mr-2 font-bold">•</span>
+                                <span><strong>亞成鳥特徵：</strong>幼鳥的喙部顏色較淺（偏粉灰），飛羽末端帶有黑色斑點。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="card">
-            <h2>我的興趣與技能</h2>
-            <span class="tag">HTML / CSS 基礎</span>
-            <span class="tag">風景攝影</span>
-            <span class="tag">吉他社成員</span>
-            <span class="tag">英文閱讀</span>
+        <!-- 分頁 2：生態習性 -->
+        <section id="content-habits" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="md:flex flex-row-reverse">
+                    <!-- 引用同一資料夾內的 bird2.png，並提供載入失敗時的佔位圖 -->
+                    <div class="md:w-1/2 bg-stone-200 relative">
+                        <img src="bird2.png" 
+                             alt="黑臉琵鷺覓食與棲息習性" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x450/e7e5e4/1c1917?text=bird2.png+(黑臉琵鷺習性)';"
+                             class="w-full h-64 md:h-full object-cover">
+                        <span class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-md backdrop-blur-sm">圖：濕地棲息與覓食</span>
+                    </div>
+                    <div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
+                        <div class="inline-flex items-center space-x-2 text-amber-700 font-semibold text-sm">
+                            <span>覓食與遷徙節奏</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-stone-900">觸覺敏銳的「掃水獵手」</h2>
+                        <p class="text-stone-600 leading-relaxed text-sm sm:text-base">
+                            與許多依賴視力捕食的鳥類不同，黑臉琵鷺主要靠<strong>觸覺</strong>覓食。牠們會將微張的長喙伸入水中，一邊涉水前進、一邊左右擺動頭部「掃水」，一旦觸碰到小魚、蝦或水生昆蟲，便會迅速閉合鳥喙將獵物吞下。
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                            <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-100">
+                                <h3 class="font-bold text-stone-800 text-sm mb-1">🌙 晨昏活躍</h3>
+                                <p class="text-xs text-stone-600 leading-relaxed">多在清晨、黃昏或退潮時段集體覓食，白天漲潮時則常單腳站立在紅樹林或沙洲上休息。</p>
+                            </div>
+                            <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-100">
+                                <h3 class="font-bold text-stone-800 text-sm mb-1">🧭 季節遷徙</h3>
+                                <p class="text-xs text-stone-600 leading-relaxed">每年 10 月至翌年 4 月南下至澳門路氹城濕地越冬，春季北返朝鮮半島及遼東半島繁殖。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="card">
-            <h2>高一學習紀錄</h2>
-            <ul>
-                <li><strong>2026年11月：</strong>完成人生第一個個人網頁並成功發佈上線！</li>
-                <li><strong>2026年10月：</strong>參加校內資訊社迎新活動，學習基礎邏輯概念。</li>
-                <li><strong>2026年09月：</strong>進入高中，訂定高一自主學習計畫。</li>
-            </ul>
+        <!-- 分頁 3：保育現況 -->
+        <section id="content-conservation" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full mb-2">IUCN 瀕危物種 (Endangered)</span>
+                    <h2 class="text-2xl font-bold text-stone-900">為什麼黑臉琵鷺如此珍貴？</h2>
+                    <p class="text-stone-600 mt-2 text-sm sm:text-base leading-relaxed">
+                        黑臉琵鷺是全球琵鷺屬中最稀有的物種，僅分布於東亞及東南亞地區。過去曾因沿海濕地開發、環境污染及人為干擾，全球數量一度跌破 300 隻。
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-emerald-50/70 border border-emerald-100 p-5 rounded-xl">
+                        <div class="text-emerald-700 font-bold text-lg mb-1">全球協力復育</div>
+                        <p class="text-sm text-stone-700 leading-relaxed">
+                            透過東亞各地同步普查與棲地保護，近年全球族群已穩步回升至逾 6,900 隻，但仍高度依賴完整的河口濕地生態系。
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50/70 border border-emerald-100 p-5 rounded-xl">
+                        <div class="text-emerald-700 font-bold text-lg mb-1">澳門的重要角色</div>
+                        <p class="text-sm text-stone-700 leading-relaxed">
+                            路氹城生態保護區（生態一區及二區）位於珠江口西岸，擁有豐富的紅樹林與泥灘，為黑臉琵鷺提供了安全且食物充足的越冬中繼站。
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50/70 border border-emerald-100 p-5 rounded-xl">
+                        <div class="text-emerald-700 font-bold text-lg mb-1">國家一級保護</div>
+                        <p class="text-sm text-stone-700 leading-relaxed">
+                            黑臉琵鷺已被列為中國國家一級重點保護野生動物，同時受到《瀕危野生動植物種國際貿易公約》（CITES）嚴格保護。
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="card">
-            <h2>聯絡方式</h2>
-            <p>歡迎透過 Email 與我交流：<a href="mailto:example@email.com">example@email.com</a></p>
-        </section>
-    </div>
+        <!-- 分頁 4：觀鳥守則 -->
+        <section id="content-rules" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8 space-y-6">
+                <div>
+                    <span class="text-emerald-700 font-semibold text-sm">尊重自然・友善賞鳥</span>
+                    <h2 class="text-2xl font-bold text-stone-900 mt-1">路氹城生態保護區觀鳥守則</h2>
+                    <p class="text-stone-600 mt-2 text-sm sm:text-base">
+                        進入生態保護區前，請務必遵守以下行為規範，將人為干擾降至最低，讓遠道而來的候鳥能安心休養：
+                    </p>
+                </div>
 
-    <footer>
-        <p>© 2026 王小明 All Rights Reserved.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-start p-4 bg-stone-50 rounded-xl border border-stone-200/80">
+                        <span class="text-2xl mr-3.5">🤫</span>
+                        <div>
+                            <h3 class="font-bold text-stone-900 text-base">保持安靜，輕聲細語</h3>
+                            <p class="text-sm text-stone-600 mt-1 leading-relaxed">請將手機調至靜音或震動模式，交談時放低音量，避免大聲喧嘩驚嚇正在覓食或休息的鳥群。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start p-4 bg-stone-50 rounded-xl border border-stone-200/80">
+                        <span class="text-2xl mr-3.5">📸</span>
+                        <div>
+                            <h3 class="font-bold text-stone-900 text-base">禁用閃光燈與無人機</h3>
+                            <p class="text-sm text-stone-600 mt-1 leading-relaxed">強光會嚴重刺激鳥類視覺，無人機則會被視為天敵引發鳥群恐慌棄巢，園區內嚴禁使用。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start p-4 bg-stone-50 rounded-xl border border-stone-200/80">
+                        <span class="text-2xl mr-3.5">👕</span>
+                        <div>
+                            <h3 class="font-bold text-stone-900 text-base">穿著自然色系衣物</h3>
+                            <p class="text-sm text-stone-600 mt-1 leading-relaxed">建議穿著深綠、卡其、灰或棕色等貼近自然的服裝，避免鮮紅、亮黃或純白等高反差顏色。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start p-4 bg-stone-50 rounded-xl border border-stone-200/80">
+                        <span class="text-2xl mr-3.5">🚫</span>
+                        <div>
+                            <h3 class="font-bold text-stone-900 text-base">切勿餵食與丟棄垃圾</h3>
+                            <p class="text-sm text-stone-600 mt-1 leading-relaxed">不隨意投餵任何食物，也不得採摘植物或破壞濕地環境，離開時請將隨身垃圾一併帶走。</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start p-4 bg-stone-50 rounded-xl border border-stone-200/80 sm:col-span-2">
+                        <span class="text-2xl mr-3.5">🔭</span>
+                        <div>
+                            <h3 class="font-bold text-stone-900 text-base">留在指定觀鳥屋與步道內</h3>
+                            <p class="text-sm text-stone-600 mt-1 leading-relaxed">請跟隨導賞員指引，在指定觀鳥屋透過望遠鏡觀察，切勿跨越圍欄或擅自進入泥灘及紅樹林區。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾資訊 -->
+    <footer class="bg-stone-200/70 border-t border-stone-200 text-stone-600 text-xs py-6 mt-auto">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+            <p>澳門路氹城生態保護區｜生態保育教育導覽</p>
+            <p>請愛護濕地環境，共同守護珍稀候鳥家園</p>
+        </div>
     </footer>
 
+    <!-- 分頁切換控制腳本 -->
+    <script>
+        /**
+         * 切換分頁顯示內容與按鈕樣式
+         * @param {string} tabName - 目標分頁名稱 ('appearance' | 'habits' | 'conservation' | 'rules')
+         */
+        function switchTab(tabName) {
+            try {
+                // 1. 隱藏所有內容區塊
+                const contents = document.querySelectorAll('.tab-content');
+                contents.forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('block');
+                });
+
+                // 2. 重設所有分頁按鈕的樣式為未選取狀態
+                const buttons = document.querySelectorAll('.tab-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('bg-stone-50', 'text-emerald-900', 'shadow-sm');
+                    btn.classList.add('text-emerald-100', 'hover:bg-emerald-700/70');
+                });
+
+                // 3. 顯示目標內容區塊
+                const targetContent = document.getElementById('content-' + tabName);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
+                    targetContent.classList.add('block');
+                }
+
+                // 4. 設定目標按鈕為選取狀態，並在手機版自動將該按鈕捲動至可視範圍
+                const targetBtn = document.getElementById('tab-' + tabName);
+                if (targetBtn) {
+                    targetBtn.classList.remove('text-emerald-100', 'hover:bg-emerald-700/70');
+                    targetBtn.classList.add('bg-stone-50', 'text-emerald-900', 'shadow-sm');
+                    targetBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            } catch (error) {
+                console.error('切換分頁時發生錯誤:', error);
+            }
+        }
+    </script>
 </body>
+    http://10.32.52.103/computer/upload/test123/ai3_act/ai3_index.html
 </html>
